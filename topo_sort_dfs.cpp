@@ -12,7 +12,6 @@ void topoSort(int node, vector<bool>& visited, stack<int>& s, unordered_map<int,
 }
 
 vector<int> topologicalSort(vector<vector<int>>& edges, int v, int e) {
-    // Create an adjacency list to represent the graph
     unordered_map<int, list<int>> adjList;
 
     for (int i = 0; i < e; i++) {
@@ -64,12 +63,12 @@ int main() {
 
     // Check if the result is a valid topological sort
     bool isTopologicalSort = true;
-    for (int i = 0; i < result.size(); i++) {
+    for (int i = 0; i < result.size() - 1; i++) {
         int node = result[i];
 
         for (auto neighbour : edges) {
-            if (neighbour[0] == node) {
-                // If there is an edge from the current node to any other node in the result,
+            if (neighbour[0] == node && neighbour[1] == result[i + 1]) {
+                // If there is an edge from the current node to the next node in the result,
                 // it is not a valid topological sort
                 isTopologicalSort = false;
                 break;
